@@ -1,0 +1,12 @@
+---
+- name: Install apt-packages
+  when: ansible_distribution == "Ubuntu"
+  with_items:
+    - git
+    - python3
+    - ansible
+    - vim
+    - openssh-server
+    - wget
+    - ntp
+  apt: name={{ item }} state=latest

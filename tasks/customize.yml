@@ -1,0 +1,7 @@
+---
+- name: Download vim.basic
+  get_url:
+    url: https://gist.githubusercontent.com/PeerRails/54701f3ebd4081736007a4035ad68b92/raw/6ad7f355ba98e711446fc46c7d294b8e9e307be7/.vimrc
+    dest: /home/prails/.vimrc
+    owner: prails
+    mode: "u=rw,g=r"

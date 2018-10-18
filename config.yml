@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  vars:
+    ansible_become: true
+    ansible_user: prails
+    ansible_become_user: root
+    ansible_become_method: sudo
+    ansible_become_pass: ""
+  
+  tasks:
+    - include_tasks: "tasks/packages.yml"
+    - include_tasks:  "tasks/ssh.yml"
+    - include_tasks:  "tasks/customize.yml"

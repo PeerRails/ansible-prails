@@ -1,0 +1,21 @@
+---
+- name: Enable sshd
+  service:
+    name: sshd
+    state: started
+    enabled: yes
+
+- name: Gather facts about folder .ssh
+  stat:
+    path: /home/prails/.ssh
+  register: ssh_folder
+
+- name: Generate hosts ssh keys
+  shell: ssh-keygen -t rsa -b 2048 -C "prails@$(hostname)" -N "" -f /home/prails/.ssh/id_rsa -q
+  when: ssh_folder.stat.exists == False
+
+- name: Authorize prails public keys
+  get_url:
+    url: https://github.com/peerrails.keys
+    dest: /home/prails/.ssh/authorized_keys
+  when: ssh_folder.stat.exists == False
